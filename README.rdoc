@@ -1,6 +1,14 @@
 = rails_locale_detection
 
-Description goes here.
+Sets the current locale of a request using a combination of params, cookies, and http headers
+
+== Usage
+
+Include the gem 
+
+
+
+
 
 == Contributing to rails_locale_detection
  

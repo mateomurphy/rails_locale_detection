@@ -1,6 +1,11 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
+
 require 'rspec'
+require 'i18n'
+require 'active_support/core_ext'
+require 'timecop'
+
 require 'rails_locale_detection'
 
 # Requires supporting files with custom matchers and macros, etc,
