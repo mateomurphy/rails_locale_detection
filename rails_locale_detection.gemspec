@@ -29,7 +29,8 @@ Gem::Specification.new do |s|
     "lib/rails_locale_detection.rb",
     "rails_locale_detection.gemspec",
     "spec/rails_locale_detection_spec.rb",
-    "spec/spec_helper.rb"
+    "spec/spec_helper.rb",
+    "spec/support/mock.rb"
   ]
   s.homepage = %q{http://github.com/mateomurphy/rails_locale_detection}
   s.licenses = ["MIT"]
