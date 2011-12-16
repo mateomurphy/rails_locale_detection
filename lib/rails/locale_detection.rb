@@ -11,8 +11,9 @@ module Rails
       I18n.default_locale
     end
   
+    # returns the (symbolized) value passed if it's in the available_locales
     def validate_locale(locale)
-      locale if locale && available_locales.include?(locale.to_sym)
+      locale.to_sym if locale && available_locales.include?(locale.to_sym)
     end
   
     def locale_from_param
@@ -20,20 +21,25 @@ module Rails
     end
   
     def locale_from_cookies
-      validate_locale(params[:locale])
+      validate_locale(cookies[:locale])
     end  
   
     def locale_from_request
-      request.preferred_language_from(available_locales)
+      validate_locale(request.preferred_language_from(available_locales))
     end
   
     def get_locale
       locale_from_param || locale_from_cookies || locale_from_request || default_locale
     end
     
+    # set I18n.locale, default_url_options[:locale] and cookies[:locale] to the value returned by
+    # get_locale
     def set_locale
-      I18n.locale = get_locale
+      default_url_options[:locale] = I18n.locale = get_locale
+      
       cookies[:locale] = { :value => I18n.locale, :expires => locale_expiry.from_now }
+      
+      I18n.locale
     end  
   end
 end
