@@ -1,14 +1,27 @@
 = rails_locale_detection
 
-Sets the current locale of a request using a combination of params, cookies, and http headers
+Sets the current locale of a request using a combination of params, cookies, and http headers. 
+
+In turn, it checks the value of params[:locale], cookies[:locale] and finally HTTP_ACCEPT_LANGUAGE headers to find a locale that
+corresponds to the available locales, then stores the set locale in a cookie for future requests.
 
 == Usage
 
-Include the gem 
+Include the gem in your Gemfile 
 
+  gem 'rails_locale_detection'
+  
+Set your default and available locales
 
+  I18n.default_locale = :en
+  I18n.available_locales = [:en, :fr]
+  
+Call set_locale as a filter in your controllers
 
-
+  class ApplicationController < ActionController::Base
+    before_filter :set_locale
+    
+  end
 
 == Contributing to rails_locale_detection
  
