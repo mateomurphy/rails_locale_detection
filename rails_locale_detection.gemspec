@@ -20,11 +20,14 @@ Gem::Specification.new do |s|
     ".document",
     ".rspec",
     "Gemfile",
+    "Gemfile.lock",
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "lib/rails/locale_detection.rb",
     "lib/rails_locale_detection.rb",
+    "rails_locale_detection.gemspec",
     "spec/rails_locale_detection_spec.rb",
     "spec/spec_helper.rb"
   ]
@@ -41,6 +44,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<http_accept_language>, [">= 0"])
       s.add_development_dependency(%q<i18n>, [">= 0"])
       s.add_development_dependency(%q<timecop>, [">= 0"])
+      s.add_development_dependency(%q<actionpack>, ["~> 3.1.1"])
       s.add_development_dependency(%q<activesupport>, ["~> 3.1.1"])
       s.add_development_dependency(%q<rspec>, ["~> 2.3.0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
@@ -50,6 +54,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<http_accept_language>, [">= 0"])
       s.add_dependency(%q<i18n>, [">= 0"])
       s.add_dependency(%q<timecop>, [">= 0"])
+      s.add_dependency(%q<actionpack>, ["~> 3.1.1"])
       s.add_dependency(%q<activesupport>, ["~> 3.1.1"])
       s.add_dependency(%q<rspec>, ["~> 2.3.0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
@@ -60,6 +65,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<http_accept_language>, [">= 0"])
     s.add_dependency(%q<i18n>, [">= 0"])
     s.add_dependency(%q<timecop>, [">= 0"])
+    s.add_dependency(%q<actionpack>, ["~> 3.1.1"])
     s.add_dependency(%q<activesupport>, ["~> 3.1.1"])
     s.add_dependency(%q<rspec>, ["~> 2.3.0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])

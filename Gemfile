@@ -9,6 +9,7 @@ gem 'http_accept_language'
 group :development do
   gem 'i18n'
   gem 'timecop'
+  gem 'actionpack', '~> 3.1.1'
   gem 'activesupport', '~> 3.1.1'
   gem "rspec", "~> 2.3.0"
   gem "bundler", "~> 1.0.0"

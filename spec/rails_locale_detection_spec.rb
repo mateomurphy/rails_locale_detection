@@ -3,27 +3,6 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 I18n.available_locales = [:en, :fr]
 Timecop.freeze
 
-class MockRequest
-  include HttpAcceptLanguage
-  
-  attr_accessor :env
-  
-  def initialize
-    @env = {'HTTP_ACCEPT_LANGUAGE' => ''}
-  end
-end
-
-class MockController
-  include Rails::LocaleDetection
-  
-  attr_accessor :request, :params, :cookies
-  
-  def initialize(request)
-    @request = request
-    @params = @cookies = {}
-  end
-end
-
 describe Rails::LocaleDetection do
   let(:request) { MockRequest.new }
   let(:controller) { MockController.new(request) }
@@ -60,7 +39,7 @@ describe Rails::LocaleDetection do
   describe '#locale_from_param' do
     it "should return en if the param set was valid" do
       controller.params[:locale] = 'en'
-      controller.locale_from_param.should eq('en')
+      controller.locale_from_param.should eq(:en)
     end
     
     it "should return nil if the param set was not" do
@@ -76,7 +55,7 @@ describe Rails::LocaleDetection do
   describe '#locale_from_cookie' do
     it "should return en if the param set was valid" do
       controller.cookies[:locale] = 'en'
-      controller.locale_from_cookies.should eq('en')
+      controller.locale_from_cookies.should eq(:en)
     end
     
     it "should return nil if the param set was not" do
@@ -92,7 +71,7 @@ describe Rails::LocaleDetection do
   describe '#locale_from_request' do
     it "should return en if the param set was valid" do
       request.env['HTTP_ACCEPT_LANGUAGE'] = 'en-us,en-gb;q=0.8,en;q=0.6'
-      controller.locale_from_request.should eq('en')
+      controller.locale_from_request.should eq(:en)
     end
     
     it "should return nil if the param set was not" do
@@ -112,17 +91,17 @@ describe Rails::LocaleDetection do
 
     it "should return en if the params is set to en" do
       controller.params[:locale] = "en"
-      controller.get_locale.should eq("en")
+      controller.get_locale.should eq(:en)
     end
 
     it "should return fr if the cookie is set to fr" do
       controller.cookies[:locale] = "fr"
-      controller.get_locale.should eq("fr")
+      controller.get_locale.should eq(:fr)
     end
 
     it "should return en if the request is set to en" do
       request.env['HTTP_ACCEPT_LANGUAGE'] = 'en-us,en-gb;q=0.8,en;q=0.6'
-      controller.get_locale.should eq('en')
+      controller.get_locale.should eq(:en)
     end
   end
 
@@ -137,13 +116,11 @@ describe Rails::LocaleDetection do
     end
     
     it "should set the language" do
-      controller.cookies[:locale][:value].should eq(:fr)
+      controller.cookies[:locale].should eq(:fr)
     end
     
-    it "should set the expiry" do
-      controller.cookies[:locale][:expires].should eq(Rails::LocaleDetection.locale_expiry.from_now)
+    it "should set the default_url_options" do
+      controller.default_url_options[:locale].should eq(:fr)
     end
-    
-    
   end
 end

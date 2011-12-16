@@ -4,6 +4,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'rspec'
 require 'i18n'
 require 'active_support/core_ext'
+require 'action_dispatch/middleware/cookies'
 require 'timecop'
 
 require 'rails_locale_detection'
