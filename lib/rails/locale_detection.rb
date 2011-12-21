@@ -3,6 +3,13 @@ module Rails
     mattr_accessor :locale_expiry
     @@locale_expiry = 3.months
     
+    mattr_accessor :set_default_url_option
+    @@set_default_url_option = true
+    
+    def self.config
+      yield self
+    end
+    
     def available_locales
       I18n.available_locales
     end
@@ -35,7 +42,9 @@ module Rails
     # set I18n.locale, default_url_options[:locale] and cookies[:locale] to the value returned by
     # get_locale
     def set_locale
-      default_url_options[:locale] = I18n.locale = get_locale
+      I18n.locale = get_locale
+      
+      default_url_options[:locale] = I18n.locale if set_default_url_option
       
       cookies[:locale] = { :value => I18n.locale, :expires => locale_expiry.from_now }
       

@@ -10,7 +10,9 @@ describe Rails::LocaleDetection do
   
   describe '.locale_expiry' do
     it "is set to 3 months by default" do
-      Rails::LocaleDetection.locale_expiry.should eq(3.months)
+      Rails::LocaleDetection.config do |c|
+        c.locale_expiry.should eq(3.months)
+      end
     end
   end
   
@@ -106,21 +108,46 @@ describe Rails::LocaleDetection do
   end
 
   describe '#set_locale' do
-    before :all do
-      controller.params[:locale] = "fr"
-      controller.set_locale
+    context "with set default_url_option true" do
+      before :all do
+        Rails::LocaleDetection.set_default_url_option = true
+        controller.params[:locale] = "fr"
+        controller.set_locale
+      end
+    
+      it "sets the current locale to the locale param" do
+        I18n.locale.should eq(:fr)
+      end
+    
+      it "sets the language" do
+        controller.cookies[:locale].should eq(:fr)
+      end
+    
+      it "sets the default_url_options" do
+        controller.default_url_options[:locale].to_s.should eq('fr')
+      end
     end
     
-    it "sets the current locale to the locale param" do
-      I18n.locale.should eq(:fr)
-    end
+    context "with set default_url_option false" do
+      before :all do
+        Rails::LocaleDetection.set_default_url_option = false
+        controller.default_url_options = {}
+        controller.params[:locale] = "fr"
+        controller.set_locale
+      end
     
-    it "sets the language" do
-      controller.cookies[:locale].should eq(:fr)
-    end
+      it "sets the current locale to the locale param" do
+        I18n.locale.should eq(:fr)
+      end
     
-    it "sets the default_url_options" do
-      controller.default_url_options[:locale].to_s.should eq('fr')
-    end
+      it "sets the language" do
+        controller.cookies[:locale].should eq(:fr)
+      end
+    
+      it "doesn't set the default_url_options" do
+        controller.default_url_options[:locale].should be_nil
+      end
+    end    
   end
+
 end
