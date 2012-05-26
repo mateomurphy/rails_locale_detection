@@ -27,14 +27,10 @@ Call set_locale as a filter in your controllers
 
 There are two configuration options:
 
-  Rails::LocaleDetection.locale_expiry 
-
-This sets how long the locale cookie lasts. 3.months is the default.
-
-  Rails::LocaleDetection.set_default_url_option
-  
-When true, this sets the default_url_options[:locale] to the current locale when set_locale is called; this is useful when your urls
-contain your locale. Set to true by default.
+  Rails::LocaleDetection.config do |config|
+    config.locale_expiry = 3.months # This sets how long the locale cookie lasts.
+    config.set_default_url_option = true # sets the default_url_options[:locale] to the current locale when set_locale is called
+  end
 
 == Contributing to rails_locale_detection
  

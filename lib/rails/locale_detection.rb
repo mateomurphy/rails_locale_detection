@@ -6,6 +6,10 @@ module Rails
     mattr_accessor :set_default_url_option
     @@set_default_url_option = true
     
+    def self.config
+      yield self
+    end
+    
     def available_locales
       I18n.available_locales
     end
