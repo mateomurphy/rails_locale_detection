@@ -1,9 +1,10 @@
 = rails_locale_detection
 
-Sets the current locale of a request using a combination of params, cookies, and http headers. 
+Sets the current locale of a request using a combination of params, cookies, http headers, and an optional user object. 
 
-In turn, it checks the value of params[:locale], cookies[:locale] and finally HTTP_ACCEPT_LANGUAGE headers to find a locale that
-corresponds to the available locales, then stores the set locale in a cookie for future requests.
+In turn, it checks the value of params[:locale], cookies[:locale] and HTTP_ACCEPT_LANGUAGE headers to find a locale that
+corresponds to the available locales, then stores the set locale in a cookie for future requests. If a user_locale method
+is provided, the return value will be used, with preference over the other locale detection methods.
 
 == Usage
 
@@ -23,13 +24,26 @@ Call set_locale as a filter in your controllers
     
   end
 
+To support user locales, add a user_locale method
+
+  class ApplicationController < ActionController::Base
+    before_filter :set_locale
+
+    def user_locale
+      current_user.locale if current_user
+    end
+    
+  end
+
+
 == Configuration
 
-There are two configuration options:
+The configuration options:
 
   Rails::LocaleDetection.config do |config|
     config.locale_expiry = 3.months # This sets how long the locale cookie lasts.
     config.set_default_url_option = true # sets the default_url_options[:locale] to the current locale when set_locale is called
+    config.detection_order = [:user, :param, :cookie, :request] # set the order in which locale detection occurs. Omit values to skip those sources
   end
 
 == Contributing to rails_locale_detection
