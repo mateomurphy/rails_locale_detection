@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "rails_locale_detection"
-  s.version = "1.1.0"
+  s.version = "1.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Mateo Murphy"]
-  s.date = "2012-05-26"
+  s.date = "2012-06-05"
   s.description = "Sets the current locale of a request using a combination of params, cookies, and http headers"
   s.email = "mateo.murphy@gmail.com"
   s.extra_rdoc_files = [
