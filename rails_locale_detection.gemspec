@@ -9,12 +9,12 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Mateo Murphy"]
-  s.date = "2012-06-05"
+  s.date = "2012-12-24"
   s.description = "Sets the current locale of a request using a combination of params, cookies, and http headers"
   s.email = "mateo.murphy@gmail.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
-    "README.rdoc"
+    "README.md"
   ]
   s.files = [
     ".document",
@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
-    "README.rdoc",
+    "README.md",
     "Rakefile",
     "VERSION",
     "lib/rails/locale_detection.rb",
@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/mateomurphy/rails_locale_detection"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.21"
+  s.rubygems_version = "1.8.23"
   s.summary = "locale setting for rails project"
 
   if s.respond_to? :specification_version then
@@ -45,33 +45,30 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<http_accept_language>, [">= 0"])
       s.add_development_dependency(%q<i18n>, [">= 0"])
       s.add_development_dependency(%q<timecop>, [">= 0"])
-      s.add_development_dependency(%q<actionpack>, ["~> 3.2.2"])
-      s.add_development_dependency(%q<activesupport>, ["~> 3.2.2"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.3.0"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
-      s.add_development_dependency(%q<jeweler>, ["~> 1.6.4"])
-      s.add_development_dependency(%q<rcov>, [">= 0"])
+      s.add_development_dependency(%q<actionpack>, ["~> 3.2.9"])
+      s.add_development_dependency(%q<activesupport>, ["~> 3.2.9"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.12.0"])
+      s.add_development_dependency(%q<bundler>, ["~> 1.2.3"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
     else
       s.add_dependency(%q<http_accept_language>, [">= 0"])
       s.add_dependency(%q<i18n>, [">= 0"])
       s.add_dependency(%q<timecop>, [">= 0"])
-      s.add_dependency(%q<actionpack>, ["~> 3.2.2"])
-      s.add_dependency(%q<activesupport>, ["~> 3.2.2"])
-      s.add_dependency(%q<rspec>, ["~> 2.3.0"])
-      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
-      s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
-      s.add_dependency(%q<rcov>, [">= 0"])
+      s.add_dependency(%q<actionpack>, ["~> 3.2.9"])
+      s.add_dependency(%q<activesupport>, ["~> 3.2.9"])
+      s.add_dependency(%q<rspec>, ["~> 2.12.0"])
+      s.add_dependency(%q<bundler>, ["~> 1.2.3"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
     end
   else
     s.add_dependency(%q<http_accept_language>, [">= 0"])
     s.add_dependency(%q<i18n>, [">= 0"])
     s.add_dependency(%q<timecop>, [">= 0"])
-    s.add_dependency(%q<actionpack>, ["~> 3.2.2"])
-    s.add_dependency(%q<activesupport>, ["~> 3.2.2"])
-    s.add_dependency(%q<rspec>, ["~> 2.3.0"])
-    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
-    s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
-    s.add_dependency(%q<rcov>, [">= 0"])
+    s.add_dependency(%q<actionpack>, ["~> 3.2.9"])
+    s.add_dependency(%q<activesupport>, ["~> 3.2.9"])
+    s.add_dependency(%q<rspec>, ["~> 2.12.0"])
+    s.add_dependency(%q<bundler>, ["~> 1.2.3"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
   end
 end
 
