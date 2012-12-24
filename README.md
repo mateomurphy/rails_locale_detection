@@ -1,4 +1,6 @@
-= rails_locale_detection
+# rails_locale_detection
+
+[![Dependency Status](https://gemnasium.com/mateomurphy/rails_locale_detection.png)](https://gemnasium.com/mateomurphy/rails_locale_detection)
 
 Sets the current locale of a request using a combination of params, cookies, http headers, and an optional user object. 
 
@@ -6,45 +8,45 @@ In turn, it checks the value of params[:locale], cookies[:locale] and HTTP_ACCEP
 corresponds to the available locales, then stores the set locale in a cookie for future requests. If a user_locale method
 is provided, the return value will be used, with preference over the other locale detection methods.
 
-== Usage
+## Usage
 
 Include the gem in your Gemfile 
 
-  gem 'rails_locale_detection'
+    gem 'rails_locale_detection'
   
 Set your default and available locales
 
-  I18n.default_locale = :en
-  I18n.available_locales = [:en, :fr]
+    I18n.default_locale = :en
+    I18n.available_locales = [:en, :fr]
   
 Call set_locale as a filter in your controllers
 
-  class ApplicationController < ActionController::Base
-    before_filter :set_locale
+    class ApplicationController < ActionController::Base
+      before_filter :set_locale
     
-  end
+    end
 
 To support user locales, add a user_locale method
 
-  class ApplicationController < ActionController::Base
-    before_filter :set_locale
+    class ApplicationController < ActionController::Base
+      before_filter :set_locale
 
-    def user_locale
-      current_user.locale if current_user
-    end
+      def user_locale
+        current_user.locale if current_user
+      end
     
-  end
+    end
 
 
-== Configuration
+## Configuration
 
 The configuration options:
 
-  Rails::LocaleDetection.config do |config|
-    config.locale_expiry = 3.months # This sets how long the locale cookie lasts.
-    config.set_default_url_option = true # sets the default_url_options[:locale] to the current locale when set_locale is called
-    config.detection_order = [:user, :param, :cookie, :request] # set the order in which locale detection occurs. Omit values to skip those sources
-  end
+    Rails::LocaleDetection.config do |config|
+      config.locale_expiry = 3.months # This sets how long the locale cookie lasts.
+      config.set_default_url_option = true # sets the default_url_options[:locale] to the current locale when set_locale is called
+      config.detection_order = [:user, :param, :cookie, :request] # set the order in which locale detection occurs. Omit values to skip those sources
+    end
 
 == Contributing to rails_locale_detection
  
