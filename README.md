@@ -1,5 +1,6 @@
 # rails_locale_detection
 
+[![Build Status](https://travis-ci.org/mateomurphy/rails_locale_detection.png?branch=master)](https://travis-ci.org/mateomurphy/rails_locale_detection)
 [![Dependency Status](https://gemnasium.com/mateomurphy/rails_locale_detection.png)](https://gemnasium.com/mateomurphy/rails_locale_detection)
 
 Sets the current locale of a request using a combination of params, cookies, http headers, and an optional user object. 
@@ -19,14 +20,14 @@ Set your default and available locales
     I18n.default_locale = :en
     I18n.available_locales = [:en, :fr]
   
-Call set_locale as a filter in your controllers
+Call `set_locale` as a filter in your controllers
 
     class ApplicationController < ActionController::Base
       before_filter :set_locale
     
     end
 
-To support user locales, add a user_locale method
+To support user locales, add a `user_locale` method
 
     class ApplicationController < ActionController::Base
       before_filter :set_locale
@@ -40,15 +41,24 @@ To support user locales, add a user_locale method
 
 ## Configuration
 
-The configuration options:
+Configuration is done via a block that can be added as an initializer:
 
     Rails::LocaleDetection.config do |config|
-      config.locale_expiry = 3.months # This sets how long the locale cookie lasts.
-      config.set_default_url_option = true # sets the default_url_options[:locale] to the current locale when set_locale is called
-      config.detection_order = [:user, :param, :cookie, :request] # set the order in which locale detection occurs. Omit values to skip those sources
+      config.locale_expiry = 3.months 
+      config.set_default_url_option = :always # valid values are true, false, :always, :never and :explicity
+      config.detection_order = [:user, :param, :cookie, :request] 
     end
 
-== Contributing to rails_locale_detection
+The configuration options:
+
+* `locale_expiry` sets how long the locale cookie lasts.
+* `set_default_url_option` determines under which conditions the `default_url_option` is set
+  * `true` or `:always` sets the option on all requests
+  * `false` or `:never` never sets the option
+  * `:explicity` sets the option only when a param[:locale] is present
+* `detection_order` set the order in which locale detection occurs. Omit values to skip those sources
+
+## Contributing to rails_locale_detection
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
@@ -58,7 +68,7 @@ The configuration options:
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-== Copyright
+## Copyright
 
 Copyright (c) 2012 Mateo Murphy. See LICENSE.txt for
 further details.
