@@ -4,7 +4,7 @@ module Rails
     @@locale_expiry = 3.months
     
     mattr_accessor :set_default_url_option
-    @@set_default_url_option = true
+    @@set_default_url_option = :always
     
     mattr_accessor :detection_order
     @@detection_order = [:user, :param, :cookie, :request]
@@ -54,12 +54,17 @@ module Rails
       detection_order.inject(nil) { |result, source| result || locale_from(source) } || default_locale
     end
     
+    # returns true if the default url option should be set for this request
+    def set_default_url_option_for_request?
+      set_default_url_option === true || set_default_url_option == :always || set_default_url_option == :explicitly && params[:locale].present?
+    end
+    
     # set I18n.locale, default_url_options[:locale] and cookies[:locale] to the value returned by
     # get_locale
     def set_locale
       I18n.locale = get_locale
       
-      default_url_options[:locale] = I18n.locale if set_default_url_option
+      default_url_options[:locale] = I18n.locale if set_default_url_option_for_request?
       
       cookies[:locale] = { :value => I18n.locale, :expires => locale_expiry.from_now }
       

@@ -177,10 +177,75 @@ describe Rails::LocaleDetection do
     
   end
 
-  describe '#set_locale' do
-    context "with set default_url_option true" do
+  describe '#set_default_url_option_for_request?' do
+    context 'with a locale param' do
       before :all do
+        controller.params[:locale] = "fr"      
+      end
+      
+      it 'return true when set_default_url_option is true' do
         Rails::LocaleDetection.set_default_url_option = true
+        controller.should be_set_default_url_option_for_request
+      end
+      
+      it 'return false when set_default_url_option is fale' do
+        Rails::LocaleDetection.set_default_url_option = false
+        controller.should_not be_set_default_url_option_for_request
+      end
+      
+      it 'return false when set_default_url_option is :never' do
+        Rails::LocaleDetection.set_default_url_option = :never
+        controller.should_not be_set_default_url_option_for_request
+      end
+      
+      it 'return true when set_default_url_option is :always' do
+        Rails::LocaleDetection.set_default_url_option = :always
+        controller.should be_set_default_url_option_for_request
+      end
+      
+      it 'return true when set_default_url_option is :explicitly' do
+        Rails::LocaleDetection.set_default_url_option = :explicitly
+        controller.should be_set_default_url_option_for_request
+      end                        
+    end
+    
+    context 'without a locale param' do
+      before :all do
+        controller.params[:locale] = nil
+      end      
+      
+      it 'return true when set_default_url_option is true' do
+        Rails::LocaleDetection.set_default_url_option = true
+        controller.should be_set_default_url_option_for_request
+      end
+      
+      it 'return false when set_default_url_option is false' do
+        Rails::LocaleDetection.set_default_url_option = false
+        controller.should_not be_set_default_url_option_for_request
+      end
+      
+      it 'return false when set_default_url_option is :never' do
+        Rails::LocaleDetection.set_default_url_option = :never
+        controller.should_not be_set_default_url_option_for_request
+      end
+      
+      it 'return true when set_default_url_option is :always' do
+        Rails::LocaleDetection.set_default_url_option = :always
+        controller.should be_set_default_url_option_for_request
+      end
+      
+      it 'return false when set_default_url_option is :explicitly' do
+        Rails::LocaleDetection.set_default_url_option = :explicitly
+        controller.should_not be_set_default_url_option_for_request
+      end      
+    end
+    
+  end
+
+  describe '#set_locale' do
+    context "with set default_url_option :always" do
+      before :all do
+        Rails::LocaleDetection.set_default_url_option = :always
         controller.params[:locale] = "fr"
         controller.set_locale
       end
@@ -198,9 +263,9 @@ describe Rails::LocaleDetection do
       end
     end
     
-    context "with set default_url_option false" do
+    context "with set default_url_option :never" do
       before :all do
-        Rails::LocaleDetection.set_default_url_option = false
+        Rails::LocaleDetection.set_default_url_option = :never
         controller.default_url_options = {}
         controller.params[:locale] = "fr"
         controller.set_locale
@@ -210,14 +275,57 @@ describe Rails::LocaleDetection do
         I18n.locale.should eq(:fr)
       end
     
-      it "sets the language" do
+      it "sets the cookier locale" do
         controller.cookies[:locale].should eq(:fr)
       end
     
       it "doesn't set the default_url_options" do
         controller.default_url_options[:locale].should be_nil
       end
+    end  
+    
+    context "with set default_url_option :explicit and no locale param" do
+      before :all do
+        Rails::LocaleDetection.set_default_url_option = :explicitly
+        controller.default_url_options = {}
+        controller.params[:locale] = nil
+        controller.set_locale
+      end
+    
+      it "sets the current locale to the default param" do
+        I18n.locale.should eq(:en)
+      end
+    
+      it "sets the cookie locale" do
+        controller.cookies[:locale].should eq(:en)
+      end
+    
+      it "doesn't set the default_url_options" do
+        controller.default_url_options[:locale].should be_nil
+      end
     end    
+      
+    context "with set default_url_option :explicit and a locale param" do
+      before :all do
+        Rails::LocaleDetection.set_default_url_option = :explicitly
+        controller.default_url_options = {}
+        controller.params[:locale] = :fr
+        controller.set_locale
+      end
+    
+      it "sets the current locale to the default param" do
+        I18n.locale.should eq(:fr)
+      end
+    
+      it "sets the cookie locale" do
+        controller.cookies[:locale].should eq(:fr)
+      end
+    
+      it "doesn't set the default_url_options" do
+        controller.default_url_options[:locale].should eq(:fr)
+      end
+    end       
+      
   end
 
 end
