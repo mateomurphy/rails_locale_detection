@@ -6,6 +6,18 @@ class MockRequest
   def initialize
     @env = {'HTTP_ACCEPT_LANGUAGE' => ''}
   end
+  
+  def host
+    "localhost"
+  end
+  
+  def ssl?
+    false
+  end
+  
+  def cookies
+    {}
+  end
 end
 
 class MockController
@@ -15,14 +27,13 @@ class MockController
   
   def initialize(request)
     @request = request
-    @cookies = ActionDispatch::Cookies::CookieJar.new
+    @cookies = ActionDispatch::Cookies::CookieJar.build(request)
     @default_url_options = @params = {}
   end
   
   def user_locale
     return user.locale if user
   end
-  
 end
 
 class MockUser

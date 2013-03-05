@@ -3,6 +3,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'rspec'
 require 'i18n'
+require 'rack'
 require 'action_dispatch/middleware/cookies'
 require 'timecop'
 
