@@ -30,7 +30,6 @@ class MockController
     return user.locale if user
   end
 
-
   class << self
     attr_reader :before_filters
   end

@@ -3,6 +3,7 @@ require 'active_support/core_ext'
 require 'i18n'
 require 'http_accept_language'
 require "rails/locale_detection/filter"
+require "rails/locale_detection/internationalization_helper"
 
 module Rails
   module LocaleDetection
