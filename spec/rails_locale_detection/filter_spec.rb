@@ -99,7 +99,7 @@ describe RailsLocaleDetection::Filter do
   end
 
   describe '#locale_from' do
-    before :all do
+    before :each do
       controller.params[:locale] = 'en'
       controller.cookies[:locale] = 'fr'
     end
@@ -115,7 +115,7 @@ describe RailsLocaleDetection::Filter do
 
   describe '#get_locale' do
     context "with default detection order" do
-      before :all do
+      before :each do
         RailsLocaleDetection.detection_order = [:user, :param, :cookie, :request]
       end
 
@@ -146,7 +146,7 @@ describe RailsLocaleDetection::Filter do
     end
 
     context "with a custom detection order" do
-      before :all do
+      before :each do
         RailsLocaleDetection.detection_order = [:user, :param, :request]
       end
 
@@ -175,7 +175,7 @@ describe RailsLocaleDetection::Filter do
 
   describe '#set_default_url_option_for_request?' do
     context 'with a locale param' do
-      before :all do
+      before :each do
         controller.params[:locale] = "fr"
       end
 
@@ -206,7 +206,7 @@ describe RailsLocaleDetection::Filter do
     end
 
     context 'without a locale param' do
-      before :all do
+      before :each do
         controller.params[:locale] = nil
       end
 
@@ -240,7 +240,7 @@ describe RailsLocaleDetection::Filter do
 
   describe '#set_locale' do
     context "with set default_url_option :always" do
-      before :all do
+      before :each do
         RailsLocaleDetection.set_default_url_option = :always
         controller.params[:locale] = "fr"
         controller.set_locale
@@ -260,7 +260,7 @@ describe RailsLocaleDetection::Filter do
     end
 
     context "with set default_url_option :never" do
-      before :all do
+      before :each do
         RailsLocaleDetection.set_default_url_option = :never
         controller.default_url_options = {}
         controller.params[:locale] = "fr"
@@ -281,7 +281,7 @@ describe RailsLocaleDetection::Filter do
     end
 
     context "with set default_url_option :explicit and no locale param" do
-      before :all do
+      before :each do
         RailsLocaleDetection.set_default_url_option = :explicitly
         controller.default_url_options = {}
         controller.params[:locale] = nil
@@ -302,7 +302,7 @@ describe RailsLocaleDetection::Filter do
     end
 
     context "with set default_url_option :explicit and a locale param" do
-      before :all do
+      before :each do
         RailsLocaleDetection.set_default_url_option = :explicitly
         controller.default_url_options = {}
         controller.params[:locale] = :fr
