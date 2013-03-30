@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
   
-  gem.add_dependency(%q<activesupport>, "~> 3.2.13")
+  gem.add_dependency(%q<rails>, "~> 3.2.13")
   gem.add_dependency(%q<http_accept_language>, ">= 0")
   
   gem.add_development_dependency(%q<i18n>, ">= 0")
