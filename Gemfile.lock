@@ -104,8 +104,9 @@ PLATFORMS
 DEPENDENCIES
   actionpack (~> 3.2.13)
   bundler (~> 1.3.4)
-  gem-release
+  gem-release (~> 0.5.3)
   i18n
   rails_locale_detection!
+  rake (~> 10.0.4)
   rspec (~> 2.12.0)
   timecop
