@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     rails_locale_detection (1.3.3)
-      http_accept_language
+      http_accept_language (~> 1.0.2)
       rails (~> 3.2.13)
 
 GEM
@@ -105,8 +105,8 @@ DEPENDENCIES
   actionpack (~> 3.2.13)
   bundler (~> 1.3.4)
   gem-release (~> 0.5.3)
-  i18n
+  i18n (~> 0.6.1)
   rails_locale_detection!
   rake (~> 10.0.4)
   rspec (~> 2.12.0)
-  timecop
+  timecop (~> 0.6.1)
