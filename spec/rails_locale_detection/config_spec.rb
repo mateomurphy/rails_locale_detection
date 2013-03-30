@@ -9,5 +9,4 @@ describe RailsLocaleDetection do
       end
     end
   end
-
 end
