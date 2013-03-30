@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency('i18n', '~> 0.6.1')
   gem.add_development_dependency('timecop', '~> 0.6.1')
   gem.add_development_dependency('actionpack', '~> 3.2.13')
-  gem.add_development_dependency('rspec', '~> 2.12.0')
+  gem.add_development_dependency('rspec-rails', '~> 2.13.0')
   gem.add_development_dependency('bundler', '~> 1.3.4')
   gem.add_development_dependency('gem-release', '~> 0.5.3')  
   gem.add_development_dependency('rake', '~> 10.0.4')  

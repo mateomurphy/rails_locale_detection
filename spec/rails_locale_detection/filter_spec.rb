@@ -1,9 +1,5 @@
 require 'spec_helper'
 
-I18n.default_locale = :en
-I18n.available_locales = [:en, :fr]
-Timecop.freeze
-
 describe RailsLocaleDetection::Filter do
   let(:request) { MockRequest.new }
   let(:controller) { MockController.new(request) }
