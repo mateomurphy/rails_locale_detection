@@ -4,7 +4,7 @@ I18n.default_locale = :en
 I18n.available_locales = [:en, :fr]
 Timecop.freeze
 
-describe Rails::LocaleDetection::Filter do
+describe RailsLocaleDetection::Filter do
   let(:request) { MockRequest.new }
   let(:controller) { MockController.new(request) }
 
@@ -120,7 +120,7 @@ describe Rails::LocaleDetection::Filter do
   describe '#get_locale' do
     context "with default detection order" do
       before :all do
-        Rails::LocaleDetection.detection_order = [:user, :param, :cookie, :request]
+        RailsLocaleDetection.detection_order = [:user, :param, :cookie, :request]
       end
 
       it "returns default if nothing is set" do
@@ -151,7 +151,7 @@ describe Rails::LocaleDetection::Filter do
 
     context "with a custom detection order" do
       before :all do
-        Rails::LocaleDetection.detection_order = [:user, :param, :request]
+        RailsLocaleDetection.detection_order = [:user, :param, :request]
       end
 
       it "returns return default if nothing is set" do
@@ -184,27 +184,27 @@ describe Rails::LocaleDetection::Filter do
       end
 
       it 'return true when set_default_url_option is true' do
-        Rails::LocaleDetection.set_default_url_option = true
+        RailsLocaleDetection.set_default_url_option = true
         controller.should be_set_default_url_option_for_request
       end
 
       it 'return false when set_default_url_option is fale' do
-        Rails::LocaleDetection.set_default_url_option = false
+        RailsLocaleDetection.set_default_url_option = false
         controller.should_not be_set_default_url_option_for_request
       end
 
       it 'return false when set_default_url_option is :never' do
-        Rails::LocaleDetection.set_default_url_option = :never
+        RailsLocaleDetection.set_default_url_option = :never
         controller.should_not be_set_default_url_option_for_request
       end
 
       it 'return true when set_default_url_option is :always' do
-        Rails::LocaleDetection.set_default_url_option = :always
+        RailsLocaleDetection.set_default_url_option = :always
         controller.should be_set_default_url_option_for_request
       end
 
       it 'return true when set_default_url_option is :explicitly' do
-        Rails::LocaleDetection.set_default_url_option = :explicitly
+        RailsLocaleDetection.set_default_url_option = :explicitly
         controller.should be_set_default_url_option_for_request
       end
     end
@@ -215,27 +215,27 @@ describe Rails::LocaleDetection::Filter do
       end
 
       it 'return true when set_default_url_option is true' do
-        Rails::LocaleDetection.set_default_url_option = true
+        RailsLocaleDetection.set_default_url_option = true
         controller.should be_set_default_url_option_for_request
       end
 
       it 'return false when set_default_url_option is false' do
-        Rails::LocaleDetection.set_default_url_option = false
+        RailsLocaleDetection.set_default_url_option = false
         controller.should_not be_set_default_url_option_for_request
       end
 
       it 'return false when set_default_url_option is :never' do
-        Rails::LocaleDetection.set_default_url_option = :never
+        RailsLocaleDetection.set_default_url_option = :never
         controller.should_not be_set_default_url_option_for_request
       end
 
       it 'return true when set_default_url_option is :always' do
-        Rails::LocaleDetection.set_default_url_option = :always
+        RailsLocaleDetection.set_default_url_option = :always
         controller.should be_set_default_url_option_for_request
       end
 
       it 'return false when set_default_url_option is :explicitly' do
-        Rails::LocaleDetection.set_default_url_option = :explicitly
+        RailsLocaleDetection.set_default_url_option = :explicitly
         controller.should_not be_set_default_url_option_for_request
       end
     end
@@ -245,7 +245,7 @@ describe Rails::LocaleDetection::Filter do
   describe '#set_locale' do
     context "with set default_url_option :always" do
       before :all do
-        Rails::LocaleDetection.set_default_url_option = :always
+        RailsLocaleDetection.set_default_url_option = :always
         controller.params[:locale] = "fr"
         controller.set_locale
       end
@@ -265,7 +265,7 @@ describe Rails::LocaleDetection::Filter do
 
     context "with set default_url_option :never" do
       before :all do
-        Rails::LocaleDetection.set_default_url_option = :never
+        RailsLocaleDetection.set_default_url_option = :never
         controller.default_url_options = {}
         controller.params[:locale] = "fr"
         controller.set_locale
@@ -286,7 +286,7 @@ describe Rails::LocaleDetection::Filter do
 
     context "with set default_url_option :explicit and no locale param" do
       before :all do
-        Rails::LocaleDetection.set_default_url_option = :explicitly
+        RailsLocaleDetection.set_default_url_option = :explicitly
         controller.default_url_options = {}
         controller.params[:locale] = nil
         controller.set_locale
@@ -307,7 +307,7 @@ describe Rails::LocaleDetection::Filter do
 
     context "with set default_url_option :explicit and a locale param" do
       before :all do
-        Rails::LocaleDetection.set_default_url_option = :explicitly
+        RailsLocaleDetection.set_default_url_option = :explicitly
         controller.default_url_options = {}
         controller.params[:locale] = :fr
         controller.set_locale

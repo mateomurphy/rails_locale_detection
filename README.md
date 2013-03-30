@@ -36,7 +36,7 @@ To support user locales, add a `user_locale` method
 
 Configuration is done via a block that can be added as an initializer:
 
-    Rails::LocaleDetection.config do |config|
+    RailsLocaleDetection.config do |config|
       config.locale_expiry = 3.months
       config.set_default_url_option = :always # valid values are true, false, :always, :never and :explicity
       config.detection_order = [:user, :param, :cookie, :request]

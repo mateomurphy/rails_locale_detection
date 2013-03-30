@@ -1,7 +1,7 @@
 # encoding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'rails/locale_detection/version'
+require 'rails_locale_detection/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "rails_locale_detection"

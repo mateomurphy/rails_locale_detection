@@ -1,10 +1,10 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require '/spec_helper'
 
-describe Rails::LocaleDetection do
+describe RailsLocaleDetection do
 
   describe '.locale_expiry' do
     it "is set to 3 months by default" do
-      Rails::LocaleDetection.config do |c|
+      RailsLocaleDetection.config do |c|
         c.locale_expiry.should eq(3.months)
       end
     end
