@@ -10,4 +10,3 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 I18n.default_locale = :en
 I18n.available_locales = [:en, :fr]
 Timecop.freeze
-

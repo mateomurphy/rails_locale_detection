@@ -1,8 +1,10 @@
 require 'rails'
-require 'active_support/core_ext'
 require 'i18n'
 require 'http_accept_language'
-require "rails_locale_detection/controller_methods"
+require 'rails_locale_detection/detection_methods'
+require 'rails_locale_detection/locale_accessors'
+require 'rails_locale_detection/locale_detector'
+require 'rails_locale_detection/controller_methods'
 
 module RailsLocaleDetection
   require 'rails_locale_detection/railtie' if defined?(Rails)

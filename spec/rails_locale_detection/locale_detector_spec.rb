@@ -1,100 +1,101 @@
 require 'spec_helper'
 
-describe RailsLocaleDetection::ControllerMethods do
+describe RailsLocaleDetection::LocaleDetector do
   let(:request) { MockRequest.new }
   let(:controller) { MockController.new(request) }
+  subject(:locale_detector) { RailsLocaleDetection::LocaleDetector.new(controller) }
 
   describe '#available_locales' do
     it "shadows I18n.available_locales" do
-      controller.available_locales.should eq([:en, :fr])
+      locale_detector.available_locales.should eq([:en, :fr])
     end
   end
 
   describe '#default_locale' do
     it "shadows I18n.default locale"  do
-      controller.default_locale.should eq(:en)
+      locale_detector.default_locale.should eq(:en)
     end
   end
 
   describe '#current_locale' do
     it "shadows I18n.locale"  do
       controller.params[:locale] = 'fr'
-      controller.set_locale
+      locale_detector.set_locale
       controller.current_locale.should eq(:fr)
     end
   end
 
   describe '#validate_locale' do
     it "returns the passed locale if it's valid" do
-      controller.validate_locale(:en).should eq(:en)
+      locale_detector.validate_locale(:en).should eq(:en)
     end
 
     it "returns nil if the passed locale isn't valid" do
-      controller.validate_locale(:es).should be_nil
+      locale_detector.validate_locale(:es).should be_nil
     end
 
     it "returns nil if nil is passed" do
-      controller.validate_locale(nil).should be_nil
+      locale_detector.validate_locale(nil).should be_nil
     end
   end
 
   describe '#locale_from_param' do
     it "returns en if the param set was valid" do
       controller.params[:locale] = 'en'
-      controller.locale_from_param.should eq(:en)
+      locale_detector.locale_from_param.should eq(:en)
     end
 
     it "returns nil if the param set was not" do
       controller.params[:locale] = 'es'
-      controller.locale_from_param.should be_nil
+      locale_detector.locale_from_param.should be_nil
     end
 
     it "returns nil if not locale was set" do
-      controller.locale_from_param.should be_nil
+      locale_detector.locale_from_param.should be_nil
     end
   end
 
   describe '#locale_from_cookie' do
     it "returns en if the param set was valid" do
       controller.cookies[:locale] = 'en'
-      controller.locale_from_cookie.should eq(:en)
+      locale_detector.locale_from_cookie.should eq(:en)
     end
 
     it "returns nil if the param set was not" do
       controller.cookies[:locale] = 'es'
-      controller.locale_from_cookie.should be_nil
+      locale_detector.locale_from_cookie.should be_nil
     end
 
     it "returns nil if not locale was set" do
-      controller.locale_from_cookie.should be_nil
+      locale_detector.locale_from_cookie.should be_nil
     end
   end
 
   describe '#locale_from_request' do
     it "returns en if the param set was valid" do
       request.env['HTTP_ACCEPT_LANGUAGE'] = 'en-us,en-gb;q=0.8,en;q=0.6'
-      controller.locale_from_request.should eq(:en)
+      locale_detector.locale_from_request.should eq(:en)
     end
 
     it "returns nil if the param set was not" do
       request.env['HTTP_ACCEPT_LANGUAGE'] = 'es'
-      controller.locale_from_request.should be_nil
+      locale_detector.locale_from_request.should be_nil
     end
 
     it "returns nil if not locale was set" do
-      controller.locale_from_request.should be_nil
+      locale_detector.locale_from_request.should be_nil
     end
   end
 
   describe '#locale_from_user' do
     it "returns the locale of the user if it's valid" do
       controller.user = MockUser.new(:en)
-      controller.locale_from_user.should eq(:en)
+      locale_detector.locale_from_user.should eq(:en)
     end
 
     it "returns nil if the locale of the use isn't valid" do
       controller.user = MockUser.new(:es)
-      controller.locale_from_user.should be_nil
+      locale_detector.locale_from_user.should be_nil
     end
   end
 
@@ -105,11 +106,11 @@ describe RailsLocaleDetection::ControllerMethods do
     end
 
     it "returns the locale set in the param" do
-      controller.locale_from(:param).should eq(:en)
+      locale_detector.locale_from(:param).should eq(:en)
     end
 
     it "return the locale set in the cookie" do
-      controller.locale_from(:cookie).should eq(:fr)
+      locale_detector.locale_from(:cookie).should eq(:fr)
     end
   end
 
@@ -120,27 +121,27 @@ describe RailsLocaleDetection::ControllerMethods do
       end
 
       it "returns default if nothing is set" do
-        controller.detect_locale.should eq(:en)
+        locale_detector.detect_locale.should eq(:en)
       end
 
       it "returns en if the params is set to en" do
         controller.params[:locale] = "en"
-        controller.detect_locale.should eq(:en)
+        locale_detector.detect_locale.should eq(:en)
       end
 
       it "returns fr if the cookie is set to fr" do
         controller.cookies[:locale] = "fr"
-        controller.detect_locale.should eq(:fr)
+        locale_detector.detect_locale.should eq(:fr)
       end
 
       it "returns en if the request is set to en" do
         request.env['HTTP_ACCEPT_LANGUAGE'] = 'en-us,en-gb;q=0.8,en;q=0.6'
-        controller.detect_locale.should eq(:en)
+        locale_detector.detect_locale.should eq(:en)
       end
 
       it "return fr if the user locale was set to fr" do
         controller.user = MockUser.new(:en)
-        controller.detect_locale.should eq(:en)
+        locale_detector.detect_locale.should eq(:en)
       end
 
     end
@@ -151,22 +152,22 @@ describe RailsLocaleDetection::ControllerMethods do
       end
 
       it "returns return default if nothing is set" do
-        controller.detect_locale.should eq(:en)
+        locale_detector.detect_locale.should eq(:en)
       end
 
       it "returns en if the params is set to en" do
         controller.params[:locale] = "en"
-        controller.detect_locale.should eq(:en)
+        locale_detector.detect_locale.should eq(:en)
       end
 
       it "skips cookie" do
         controller.cookies[:locale] = "fr"
-        controller.detect_locale.should eq(:en)
+        locale_detector.detect_locale.should eq(:en)
       end
 
       it "returns en if the request is set to en" do
         request.env['HTTP_ACCEPT_LANGUAGE'] = 'en-us,en-gb;q=0.8,en;q=0.6'
-        controller.detect_locale.should eq(:en)
+        locale_detector.detect_locale.should eq(:en)
       end
 
     end
@@ -181,27 +182,27 @@ describe RailsLocaleDetection::ControllerMethods do
 
       it 'return true when set_default_url_option is true' do
         RailsLocaleDetection.set_default_url_option = true
-        controller.should be_set_default_url_option_for_request
+        locale_detector.should be_set_default_url_option_for_request
       end
 
       it 'return false when set_default_url_option is fale' do
         RailsLocaleDetection.set_default_url_option = false
-        controller.should_not be_set_default_url_option_for_request
+        locale_detector.should_not be_set_default_url_option_for_request
       end
 
       it 'return false when set_default_url_option is :never' do
         RailsLocaleDetection.set_default_url_option = :never
-        controller.should_not be_set_default_url_option_for_request
+        locale_detector.should_not be_set_default_url_option_for_request
       end
 
       it 'return true when set_default_url_option is :always' do
         RailsLocaleDetection.set_default_url_option = :always
-        controller.should be_set_default_url_option_for_request
+        locale_detector.should be_set_default_url_option_for_request
       end
 
       it 'return true when set_default_url_option is :explicitly' do
         RailsLocaleDetection.set_default_url_option = :explicitly
-        controller.should be_set_default_url_option_for_request
+        locale_detector.should be_set_default_url_option_for_request
       end
     end
 
@@ -212,27 +213,27 @@ describe RailsLocaleDetection::ControllerMethods do
 
       it 'return true when set_default_url_option is true' do
         RailsLocaleDetection.set_default_url_option = true
-        controller.should be_set_default_url_option_for_request
+        locale_detector.should be_set_default_url_option_for_request
       end
 
       it 'return false when set_default_url_option is false' do
         RailsLocaleDetection.set_default_url_option = false
-        controller.should_not be_set_default_url_option_for_request
+        locale_detector.should_not be_set_default_url_option_for_request
       end
 
       it 'return false when set_default_url_option is :never' do
         RailsLocaleDetection.set_default_url_option = :never
-        controller.should_not be_set_default_url_option_for_request
+        locale_detector.should_not be_set_default_url_option_for_request
       end
 
       it 'return true when set_default_url_option is :always' do
         RailsLocaleDetection.set_default_url_option = :always
-        controller.should be_set_default_url_option_for_request
+        locale_detector.should be_set_default_url_option_for_request
       end
 
       it 'return false when set_default_url_option is :explicitly' do
         RailsLocaleDetection.set_default_url_option = :explicitly
-        controller.should_not be_set_default_url_option_for_request
+        locale_detector.should_not be_set_default_url_option_for_request
       end
     end
 
