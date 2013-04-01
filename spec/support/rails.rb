@@ -9,15 +9,15 @@ class MockApplication
 end
 
 MockApplication.routes.draw do
-  resource :filter_tests
+  resource :callback_tests
 end
 
 ::Rails.application = MockApplication
 
-ActionController::Base.send :include, RailsLocaleDetection::Filter
+ActionController::Base.send :include, RailsLocaleDetection::ControllerMethods
 ActionController::Base.send :include, Rails.application.routes.url_helpers  
 
-class FilterTestsController < ActionController::Base
+class CallbackTestsController < ActionController::Base
 
   def user_locale
     :fr

@@ -1,5 +1,5 @@
 module RailsLocaleDetection
-  module Filter
+  module ControllerMethods
     extend ActiveSupport::Concern
 
     included do

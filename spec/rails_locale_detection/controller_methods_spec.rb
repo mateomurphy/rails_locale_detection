@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe RailsLocaleDetection::Filter do
+describe RailsLocaleDetection::ControllerMethods do
   let(:request) { MockRequest.new }
   let(:controller) { MockController.new(request) }
 

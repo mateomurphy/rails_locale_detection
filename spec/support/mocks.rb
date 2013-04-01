@@ -56,6 +56,6 @@ class MockController
     @before_filters << args
   end
 
-  include RailsLocaleDetection::Filter
+  include RailsLocaleDetection::ControllerMethods
 
 end
