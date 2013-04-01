@@ -20,3 +20,7 @@ module RailsLocaleDetection
     yield self
   end
 end
+
+module Rails
+  LocaleDetection = ::RailsLocaleDetection
+end
