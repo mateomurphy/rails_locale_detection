@@ -1,5 +1,25 @@
-require 'http_accept_language'
+require 'rails'
 require 'active_support/core_ext'
-require 'rails/locale_detection'
+require 'i18n'
+require 'http_accept_language'
+require "rails/locale_detection/filter"
+require "rails/locale_detection/internationalization_helper"
 
-ActionController::Base.send :include, Rails::LocaleDetection if defined?(ActionController)
+module Rails
+  module LocaleDetection
+    require 'rails/locale_detection/railtie' if defined?(Rails)
+
+    mattr_accessor :locale_expiry
+    @@locale_expiry = 3.months
+
+    mattr_accessor :set_default_url_option
+    @@set_default_url_option = :always
+
+    mattr_accessor :detection_order
+    @@detection_order = [:user, :param, :cookie, :request]
+
+    def self.config
+      yield self
+    end
+  end
+end
