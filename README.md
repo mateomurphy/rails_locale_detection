@@ -49,6 +49,7 @@ Configuration is done via a block that can be added as an initializer:
       config.set_default_url_option = :always # valid values are true, false, :always, :never and :explicity
       config.detection_order = [:param, :user, :cookie, :request]
       config.automatically_detect = true
+      config.locale_key = :locale
     end
 
 The configuration options:
@@ -61,7 +62,7 @@ The configuration options:
 * `detection_order` set the order in which locale detection occurs. Omit values to skip those sources
 * `automatically_detect` configures automatic inclusion of the detection callback. 
     You can set this to false and include the callback yourself by calling `detect_locale` in your controller as required.
-  
+* `locale_key` configures the key used for `param` and `cookie` 
 
 ## Contributing to rails_locale_detection
 
