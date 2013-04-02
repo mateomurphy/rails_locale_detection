@@ -21,6 +21,9 @@ module RailsLocaleDetection
   mattr_accessor :automatically_detect
   @@automatically_detect = true
 
+  mattr_accessor :locale_key
+  @@locale_key = :locale
+
   def self.config
     yield self
   end

@@ -6,11 +6,11 @@ module RailsLocaleDetection
     end
 
     def locale_from_param
-      validate_locale(params[:locale])
+      validate_locale(params[locale_key])
     end
 
     def locale_from_cookie
-      validate_locale(cookies[:locale])
+      validate_locale(cookies[locale_key])
     end
 
     def locale_from_request
@@ -33,13 +33,13 @@ module RailsLocaleDetection
     # detect_locale
     def set_locale
       self.current_locale = detect_locale
-      default_url_options[:locale] = current_locale if set_default_url_option_for_request?
-      cookies[:locale] = { :value => current_locale, :expires => RailsLocaleDetection.locale_expiry.from_now }
+      default_url_options[locale_key] = current_locale if set_default_url_option_for_request?
+      cookies[locale_key] = { :value => current_locale, :expires => RailsLocaleDetection.locale_expiry.from_now }
     end
 
     # returns true if the default url option should be set for this request
     def set_default_url_option_for_request?
-      RailsLocaleDetection.set_default_url_option === true || RailsLocaleDetection.set_default_url_option == :always || RailsLocaleDetection.set_default_url_option == :explicitly && params[:locale].present?
+      RailsLocaleDetection.set_default_url_option === true || RailsLocaleDetection.set_default_url_option == :always || RailsLocaleDetection.set_default_url_option == :explicitly && params[locale_key].present?
     end 
   end
 end    

@@ -11,6 +11,10 @@ module RailsLocaleDetection
       @controller = controller
     end
     
+    def locale_key
+      RailsLocaleDetection.locale_key
+    end
+    
     def self.before(controller)
       new(controller).set_locale
     end
