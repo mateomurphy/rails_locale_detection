@@ -4,7 +4,13 @@ module RailsLocaleDetection
     include LocaleAccessors
 
     included do
-      append_before_filter LocaleDetector
+      detect_locale
+    end
+
+    module ClassMethods
+      def detect_locale
+        append_before_filter LocaleDetector
+      end
     end
 
     def user_locale
