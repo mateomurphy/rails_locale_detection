@@ -2,17 +2,18 @@ require 'spec_helper'
 
 describe RailsLocaleDetection::ControllerMethods do
   let(:request) { MockRequest.new }
-  let(:controller) { MockController.new(request) }
+  subject(:controller) { MockController.new(request) }
 
-  describe '#available_locales' do
-    it "shadows I18n.available_locales" do
-      controller.available_locales.should eq([:en, :fr])
-    end
+  it 'provides a blank user locale method' do
+    controller.user_locale.should be_nil
   end
-
-  describe '#default_locale' do
-    it "shadows I18n.default locale"  do
-      controller.default_locale.should eq(:en)
-    end
+  
+  it 'should provide a detect locale method' do
+    controller.class.should respond_to(:detect_locale)
+  end 
+  
+  it 'should add a before filter' do
+    controller.class.before_filters.should eq([[RailsLocaleDetection::LocaleDetector]])
   end
+  
 end
