@@ -1,10 +1,12 @@
-require 'rspec'
-require 'action_dispatch/middleware/cookies'
+require 'abstract_controller'
+require 'action_controller'
+require 'active_support'
+require 'rspec/rails'
 require 'timecop'
-require 'rails'
-require 'active_support/core_ext'
-require 'i18n'
-require 'http_accept_language'
 require 'rails_locale_detection'
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
+
+I18n.default_locale = :en
+I18n.available_locales = [:en, :fr]
+Timecop.freeze
