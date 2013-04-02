@@ -16,7 +16,10 @@ module RailsLocaleDetection
   @@set_default_url_option = :always
 
   mattr_accessor :detection_order
-  @@detection_order = [:user, :param, :cookie, :request]
+  @@detection_order = [:param, :user, :cookie, :request]
+
+  mattr_accessor :automatically_detect
+  @@automatically_detect = true
 
   def self.config
     yield self

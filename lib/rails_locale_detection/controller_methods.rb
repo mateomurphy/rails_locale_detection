@@ -4,7 +4,7 @@ module RailsLocaleDetection
     include LocaleAccessors
 
     included do
-      detect_locale
+      detect_locale if RailsLocaleDetection.automatically_detect
     end
 
     module ClassMethods
