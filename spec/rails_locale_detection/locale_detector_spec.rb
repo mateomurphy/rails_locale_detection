@@ -244,7 +244,7 @@ describe RailsLocaleDetection::LocaleDetector do
       before :each do
         RailsLocaleDetection.set_default_url_option = :always
         controller.params[:locale] = "fr"
-        controller.set_locale
+        locale_detector.set_locale
       end
 
       it "sets the current locale to the locale param" do
@@ -265,7 +265,7 @@ describe RailsLocaleDetection::LocaleDetector do
         RailsLocaleDetection.set_default_url_option = :never
         controller.default_url_options = {}
         controller.params[:locale] = "fr"
-        controller.set_locale
+        locale_detector.set_locale
       end
 
       it "sets the current locale to the locale param" do
@@ -286,7 +286,7 @@ describe RailsLocaleDetection::LocaleDetector do
         RailsLocaleDetection.set_default_url_option = :explicitly
         controller.default_url_options = {}
         controller.params[:locale] = nil
-        controller.set_locale
+        locale_detector.set_locale
       end
 
       it "sets the current locale to the default param" do
@@ -307,7 +307,7 @@ describe RailsLocaleDetection::LocaleDetector do
         RailsLocaleDetection.set_default_url_option = :explicitly
         controller.default_url_options = {}
         controller.params[:locale] = :fr
-        controller.set_locale
+        locale_detector.set_locale
       end
 
       it "sets the current locale to the default param" do
