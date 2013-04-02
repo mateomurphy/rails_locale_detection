@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/mateomurphy/rails_locale_detection.png?branch=master)](https://travis-ci.org/mateomurphy/rails_locale_detection)
 [![Dependency Status](https://gemnasium.com/mateomurphy/rails_locale_detection.png)](https://gemnasium.com/mateomurphy/rails_locale_detection)
 
-Sets the current locale of a request using a combination of params, cookies, http headers, and an optional user object. 
+Sets the current locale of a request using a combination of params, cookies, http headers, and an optional user object.
 
 In turn, it checks the value of params[:locale], cookies[:locale] and HTTP_ACCEPT_LANGUAGE headers to find a locale that
 corresponds to the available locales, then stores the set locale in a cookie for future requests. If a user_locale method
@@ -11,21 +11,14 @@ is provided, the return value will be used, with preference over the other local
 
 ## Usage
 
-Include the gem in your Gemfile 
+Include the gem in your Gemfile
 
     gem 'rails_locale_detection'
-  
+
 Set your default and available locales
 
     I18n.default_locale = :en
     I18n.available_locales = [:en, :fr]
-  
-Call `set_locale` as a filter in your controllers
-
-    class ApplicationController < ActionController::Base
-      before_filter :set_locale
-    
-    end
 
 To support user locales, add a `user_locale` method
 
@@ -35,7 +28,7 @@ To support user locales, add a `user_locale` method
       def user_locale
         current_user.locale if current_user
       end
-    
+
     end
 
 
@@ -44,9 +37,9 @@ To support user locales, add a `user_locale` method
 Configuration is done via a block that can be added as an initializer:
 
     Rails::LocaleDetection.config do |config|
-      config.locale_expiry = 3.months 
+      config.locale_expiry = 3.months
       config.set_default_url_option = :always # valid values are true, false, :always, :never and :explicity
-      config.detection_order = [:user, :param, :cookie, :request] 
+      config.detection_order = [:user, :param, :cookie, :request]
     end
 
 The configuration options:
@@ -59,7 +52,7 @@ The configuration options:
 * `detection_order` set the order in which locale detection occurs. Omit values to skip those sources
 
 ## Contributing to rails_locale_detection
- 
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
 * Fork the project
