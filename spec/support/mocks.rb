@@ -6,18 +6,18 @@ class MockRequest
   def initialize
     @env = {'HTTP_ACCEPT_LANGUAGE' => ''}
   end
-  
+
   def host
     "localhost"
   end
-    
+
   def ssl?
     false
   end
-    
+
   def cookies
     {}
-  end  
+  end
 end
 
 class MockUser
@@ -52,6 +52,11 @@ class MockController
   end
 
   def self.append_before_filter(*args)
+    @before_filters ||= []
+    @before_filters << args
+  end
+
+  def self.prepend_before_filter(*args)
     @before_filters ||= []
     @before_filters << args
   end
