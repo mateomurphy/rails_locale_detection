@@ -9,7 +9,7 @@ module RailsLocaleDetection
 
     module ClassMethods
       def detect_locale
-        append_before_filter LocaleDetector
+        prepend_before_filter LocaleDetector
       end
     end
 
