@@ -57,12 +57,12 @@ describe RailsLocaleDetection::LocaleDetector do
 
   describe '#locale_from_cookie' do
     it "returns en if the param set was valid" do
-      controller.cookies[:locale] = 'en'
+      controller.request.cookie_jar[:locale] = 'en'
       locale_detector.locale_from_cookie.should eq(:en)
     end
 
     it "returns nil if the param set was not" do
-      controller.cookies[:locale] = 'es'
+      controller.request.cookie_jar[:locale] = 'es'
       locale_detector.locale_from_cookie.should be_nil
     end
 
@@ -102,7 +102,7 @@ describe RailsLocaleDetection::LocaleDetector do
   describe '#locale_from' do
     before :each do
       controller.params[:locale] = 'en'
-      controller.cookies[:locale] = 'fr'
+      controller.request.cookie_jar[:locale] = 'fr'
     end
 
     it "returns the locale set in the param" do
@@ -130,7 +130,7 @@ describe RailsLocaleDetection::LocaleDetector do
       end
 
       it "returns fr if the cookie is set to fr" do
-        controller.cookies[:locale] = "fr"
+        controller.request.cookie_jar[:locale] = "fr"
         locale_detector.detect_locale.should eq(:fr)
       end
 
@@ -161,7 +161,7 @@ describe RailsLocaleDetection::LocaleDetector do
       end
 
       it "skips cookie" do
-        controller.cookies[:locale] = "fr"
+        controller.request.cookie_jar[:locale] = "fr"
         locale_detector.detect_locale.should eq(:en)
       end
 
@@ -252,7 +252,7 @@ describe RailsLocaleDetection::LocaleDetector do
       end
 
       it "sets the language" do
-        controller.cookies[:locale].should eq(:fr)
+        controller.request.cookie_jar[:locale].should eq(:fr)
       end
 
       it "sets the default_url_options" do
@@ -273,7 +273,7 @@ describe RailsLocaleDetection::LocaleDetector do
       end
 
       it "sets the cookier locale" do
-        controller.cookies[:locale].should eq(:fr)
+        controller.request.cookie_jar[:locale].should eq(:fr)
       end
 
       it "doesn't set the default_url_options" do
@@ -294,7 +294,7 @@ describe RailsLocaleDetection::LocaleDetector do
       end
 
       it "sets the cookie locale" do
-        controller.cookies[:locale].should eq(:en)
+        controller.request.cookie_jar[:locale].should eq(:en)
       end
 
       it "doesn't set the default_url_options" do
@@ -315,7 +315,7 @@ describe RailsLocaleDetection::LocaleDetector do
       end
 
       it "sets the cookie locale" do
-        controller.cookies[:locale].should eq(:fr)
+        controller.request.cookie_jar[:locale].should eq(:fr)
       end
 
       it "doesn't set the default_url_options" do

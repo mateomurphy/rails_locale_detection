@@ -1,10 +1,12 @@
 class MockRequest
   include HttpAcceptLanguage
 
-  attr_accessor :env
+  attr_accessor :env, :cookies, :cookie_jar
 
   def initialize
     @env = {'HTTP_ACCEPT_LANGUAGE' => ''}
+    @cookies = {}
+    @cookie_jar = ActionDispatch::Cookies::CookieJar.build(self)
   end
   
   def host
@@ -14,10 +16,7 @@ class MockRequest
   def ssl?
     false
   end
-    
-  def cookies
-    {}
-  end  
+  
 end
 
 class MockUser
@@ -30,11 +29,10 @@ end
 
 class MockController
 
-  attr_accessor :request, :params, :cookies, :default_url_options, :user
+  attr_accessor :request, :params, :default_url_options, :user
 
   def initialize(request)
     @request = request
-    @cookies = ActionDispatch::Cookies::CookieJar.build(request)
     @default_url_options = @params = {}
   end
 

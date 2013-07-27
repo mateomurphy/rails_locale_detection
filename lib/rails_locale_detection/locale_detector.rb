@@ -5,10 +5,14 @@ module RailsLocaleDetection
     
     attr_reader :controller
     
-    delegate :cookies, :params, :request, :default_url_options, :user_locale, :to => :controller
+    delegate :params, :request, :default_url_options, :user_locale, :to => :controller
     
     def initialize(controller = nil)
       @controller = controller
+    end
+    
+    def cookies
+      request.cookie_jar
     end
     
     def locale_key
