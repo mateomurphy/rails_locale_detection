@@ -11,7 +11,8 @@ Gem::Specification.new do |gem|
   gem.description   = "Sets the current locale of a request using a combination of params, cookies, and http headers"
   gem.summary       = "Locale setting for rails project"
   gem.homepage      = "https://github.com/mateomurphy/rails_locale_detection"
-
+  gem.license       = 'MIT'
+  
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
