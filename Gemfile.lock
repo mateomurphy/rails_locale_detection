@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     rails_locale_detection (2.0.0.pre4)
-      http_accept_language (~> 1.0.2)
+      http_accept_language (~> 2.0.5)
       rails (>= 3.2.0)
 
 GEM
@@ -54,7 +54,7 @@ GEM
     gem-release (0.5.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
-    http_accept_language (1.0.2)
+    http_accept_language (2.0.5)
     i18n (0.7.0)
     json (1.8.3)
     loofah (2.0.3)

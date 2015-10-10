@@ -8,15 +8,15 @@ class MockRequest
     @cookies = {}
     @cookie_jar = ActionDispatch::Cookies::CookieJar.build(self)
   end
-  
+
   def host
     "localhost"
   end
-    
+
   def ssl?
     false
   end
-  
+
 end
 
 class MockUser
@@ -55,5 +55,5 @@ class MockController
   end
 
   include RailsLocaleDetection::ControllerMethods
-
+  include HttpAcceptLanguage::EasyAccess
 end

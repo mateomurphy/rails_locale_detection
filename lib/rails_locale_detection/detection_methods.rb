@@ -14,7 +14,7 @@ module RailsLocaleDetection
     end
 
     def locale_from_request
-      validate_locale(request.preferred_language_from(available_locales))
+      validate_locale(http_accept_language.preferred_language_from(available_locales))
     end
 
     def locale_from_user
@@ -40,6 +40,6 @@ module RailsLocaleDetection
     # returns true if the default url option should be set for this request
     def set_default_url_option_for_request?
       RailsLocaleDetection.set_default_url_option === true || RailsLocaleDetection.set_default_url_option == :always || RailsLocaleDetection.set_default_url_option == :explicitly && params[locale_key].present?
-    end 
+    end
   end
-end    
+end
