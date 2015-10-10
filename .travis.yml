@@ -1,5 +1,7 @@
 before_install: gem install bundler --version '1.10.6'
 
+sudo: false
+
 gemfile:
   - gemfiles/rails3.2.gemfile
   - gemfiles/rails4.0.gemfile
