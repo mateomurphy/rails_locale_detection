@@ -1,7 +1,8 @@
 gemfile:
-  - gemfiles/rails3.gemfile
-  - gemfiles/rails4.gemfile
-  
+  - gemfiles/rails3.2.gemfile
+  - gemfiles/rails4.0.gemfile
+  - gemfiles/rails4.1.gemfile
+  - gemfiles/rails4.2.gemfile
+
 rvm:
-  - "2.0.0"
-  - "1.9.3"
+  - "2.2.0"
