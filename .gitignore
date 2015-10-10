@@ -17,3 +17,6 @@ pkg
 # rvm
 .rvmrc
 .ruby-*
+
+# appraisals
+*.gemfile.lock

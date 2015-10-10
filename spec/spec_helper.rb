@@ -1,6 +1,7 @@
 require 'abstract_controller'
 require 'action_controller'
-require 'active_support'
+require 'active_support/core_ext/integer/time'
+require 'active_support/core_ext/numeric/time'
 require 'action_view'
 require 'rspec/rails'
 require 'timecop'

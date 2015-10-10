@@ -19,13 +19,14 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
 
   gem.add_dependency('http_accept_language', '~> 1.0.2')
-  gem.add_dependency('rails', '~> 4.2.0')
+  gem.add_dependency('rails', '>= 3.2.0')
 
-  gem.add_development_dependency('appraisal', '~> 0.5.2')
+  gem.add_development_dependency('appraisal', '~> 2.1.0')
   gem.add_development_dependency('bundler', '~> 1.10.6')
   gem.add_development_dependency('i18n', '~> 0.7.0')
   gem.add_development_dependency('gem-release', '~> 0.5.3')
   gem.add_development_dependency('rake', '~> 10.0.4')
   gem.add_development_dependency('rspec-rails', '~> 3.0')
   gem.add_development_dependency('timecop', '~> 0.6.1')
+  gem.add_development_dependency('test-unit', '~> 3.0')
 end
