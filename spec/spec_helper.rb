@@ -1,6 +1,7 @@
 require 'abstract_controller'
 require 'action_controller'
 require 'active_support'
+require 'action_view'
 require 'rspec/rails'
 require 'timecop'
 require 'rails_locale_detection'

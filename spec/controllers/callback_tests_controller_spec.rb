@@ -1,15 +1,15 @@
 require 'spec_helper'
 
-describe CallbackTestsController do
-  
+describe CallbackTestsController, type: :controller do
+
   it "should automatically include the callback" do
-    subject.class.ancestors.should include(RailsLocaleDetection::ControllerMethods)
+    expect(subject.class.ancestors).to include(RailsLocaleDetection::ControllerMethods)
   end
-  
+
   it "should correctly detect the user locale" do
     get :show
-    
-    response.body.should eq('fr')
+
+    expect(response.body).to eq('fr')
   end
-  
+
 end

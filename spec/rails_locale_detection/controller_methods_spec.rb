@@ -5,15 +5,15 @@ describe RailsLocaleDetection::ControllerMethods do
   subject(:controller) { MockController.new(request) }
 
   it 'provides a blank user locale method' do
-    controller.user_locale.should be_nil
+    expect(controller.user_locale).to be_nil
   end
-  
+
   it 'should provide a detect locale method' do
-    controller.class.should respond_to(:detect_locale)
-  end 
-  
-  it 'should add a before filter' do
-    controller.class.before_filters.should eq([[RailsLocaleDetection::LocaleDetector]])
+    expect(controller.class).to respond_to(:detect_locale)
   end
-  
+
+  it 'should add a before filter' do
+    expect(controller.class.before_filters).to eq([[RailsLocaleDetection::LocaleDetector]])
+  end
+
 end
