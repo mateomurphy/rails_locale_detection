@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_locale_detection (2.0.0.pre4)
+    rails_locale_detection (2.0.0)
       http_accept_language (~> 2.0.5)
       rails (>= 3.2.0)
 
