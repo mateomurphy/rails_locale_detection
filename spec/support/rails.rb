@@ -2,7 +2,7 @@ class MockApplication
   def self.env_config
     {}
   end
-  
+
   def self.routes
     @routes ||= ActionDispatch::Routing::RouteSet.new
   end
@@ -15,16 +15,21 @@ end
 ::Rails.application = MockApplication
 
 ActionController::Base.send :include, RailsLocaleDetection::ControllerMethods
-ActionController::Base.send :include, Rails.application.routes.url_helpers  
+ActionController::Base.send :include, Rails.application.routes.url_helpers
 
 class CallbackTestsController < ActionController::Base
 
   def user_locale
     :fr
   end
-  
+
   def show
-    render :text => current_locale
+    if ::Rails.version.to_s < "5.0"
+      render :text => current_locale
+    else
+      render :plain => current_locale
+    end
+
   end
-  
+
 end
