@@ -8,7 +8,7 @@ module RailsLocaleDetection
     end
 
     module ClassMethods
-      if ::Rails.version.to_s < "5.0"
+      if ::Rails.version.to_s < "4.0"
         def detect_locale
           append_before_filter LocaleDetector
         end

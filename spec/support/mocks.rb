@@ -20,7 +20,6 @@ class MockRequest
   def ssl?
     false
   end
-
 end
 
 class MockUser

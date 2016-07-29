@@ -24,10 +24,10 @@ class CallbackTestsController < ActionController::Base
   end
 
   def show
-    if ::Rails.version.to_s < "5.0"
-      render :text => current_locale
+    if ::Rails.version.to_s < "4.1"
+      render text: current_locale
     else
-      render :plain => current_locale
+      render plain: current_locale
     end
 
   end
