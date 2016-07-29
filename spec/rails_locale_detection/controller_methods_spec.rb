@@ -12,8 +12,23 @@ describe RailsLocaleDetection::ControllerMethods do
     expect(controller.class).to respond_to(:detect_locale)
   end
 
-  it 'should add a before filter' do
-    expect(controller.class.before_filters).to eq([[RailsLocaleDetection::LocaleDetector]])
+  context 'when the rails is 5.0 or later' do
+    before do
+      skip "Rails version is #{::Rails.version.to_s}" unless ::Rails.version.to_s >= '5.0'
+    end
+
+    it 'adds the detector as a before action' do
+      expect(controller.class.before_actions).to eq([[RailsLocaleDetection::LocaleDetector]])
+    end
   end
 
+  context 'when the rails is less than 5.0' do
+    before do
+      skip "Rails version is #{::Rails.version.to_s}" unless ::Rails.version.to_s < '5.0'
+    end
+
+    it 'adds the detector as a before filter' do
+      expect(controller.class.before_filters).to eq([[RailsLocaleDetection::LocaleDetector]])
+    end
+  end
 end
