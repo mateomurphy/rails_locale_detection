@@ -1,4 +1,4 @@
-before_install: gem install bundler --version '1.10.6'
+before_install: gem install bundler --version '1.12.5'
 
 sudo: false
 
@@ -7,6 +7,7 @@ gemfile:
   - gemfiles/rails4.0.gemfile
   - gemfiles/rails4.1.gemfile
   - gemfiles/rails4.2.gemfile
+  - gemfiles/rails5.0.gemfile
 
 rvm:
-  - "2.2.0"
+  - "2.3.0"
