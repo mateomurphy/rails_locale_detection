@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Mateo Murphy"]
   gem.email         = ["mateo.murphy@gmail.com"]
   gem.description   = "Sets the current locale of a request using a combination of params, cookies, and http headers"
-  gem.summary       = "Locale setting for rails project"
+  gem.summary       = "Locale setting for rails projects"
   gem.homepage      = "https://github.com/mateomurphy/rails_locale_detection"
   gem.license       = 'MIT'
 
