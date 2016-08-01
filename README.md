@@ -9,16 +9,6 @@ In turn, it checks the value of `params[:locale]`, `cookies[:locale]` and `HTTP_
 corresponds to the available locales, then stores the locale in a cookie for future requests. If a `user_locale` method
 is provided, any valid return value will be used, with preference over the other locale detection methods except for `params[:locale]`.
 
-
-## Changes to version 2
-
-* Rails 4 compatibility
-* Namespace has been changed from Rails::LocaleDetection to RailsLocaleDetection, 
-    although the previous namespace is still supported for legacy config files
-* Locale detection has been moved to a seperate object, to avoid polluting controllers with extra methods. 
-* Detection order has been changed to `param` first, as this make more sense in most contexts.
-* Shortcut locale accessors are now mixed into views as well
-
 ## Usage
 
 Include the gem in your Gemfile
@@ -60,9 +50,24 @@ The configuration options:
   * `false` or `:never` never sets the option
   * `:explicity` sets the option only when a param[:locale] is present
 * `detection_order` set the order in which locale detection occurs. Omit values to skip those sources
-* `automatically_detect` configures automatic inclusion of the detection callback. 
+* `automatically_detect` configures automatic inclusion of the detection callback.
     You can set this to false and include the callback yourself by calling `detect_locale` in your controller as required.
-* `locale_key` configures the key used for `param` and `cookie` 
+* `locale_key` configures the key used for `param` and `cookie`
+
+## Changelog
+
+### 2.1 (2016-08-01)
+
+* Rails 5 compatibility
+
+### 2.0 (2015-10-14)
+
+* Rails 4 compatibility
+* Namespace has been changed from Rails::LocaleDetection to RailsLocaleDetection,
+    although the previous namespace is still supported for legacy config files
+* Locale detection has been moved to a seperate object, to avoid polluting controllers with extra methods.
+* Detection order has been changed to `param` first, as this make more sense in most contexts.
+* Shortcut locale accessors are now mixed into views as well
 
 ## Contributing to rails_locale_detection
 
@@ -76,6 +81,6 @@ The configuration options:
 
 ## Copyright
 
-Copyright (c) 2012 Mateo Murphy. See LICENSE.txt for
+Copyright (c) 2012-present Mateo Murphy. See LICENSE.txt for
 further details.
 
