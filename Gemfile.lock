@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_locale_detection (2.0.0)
+    rails_locale_detection (2.1.0)
       http_accept_language (~> 2.0.5)
       rails (>= 3.2.0)
 
@@ -142,7 +142,7 @@ PLATFORMS
 
 DEPENDENCIES
   appraisal (~> 2.1.0)
-  bundler (~> 1.12.5)
+  bundler (~> 1.14.6)
   gem-release (~> 0.5.3)
   i18n (~> 0.7.0)
   rails_locale_detection!
@@ -152,4 +152,4 @@ DEPENDENCIES
   timecop (~> 0.6.1)
 
 BUNDLED WITH
-   1.12.5
+   1.14.6
