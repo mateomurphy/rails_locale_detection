@@ -29,12 +29,21 @@ module RailsLocaleDetection
       RailsLocaleDetection.detection_order.inject(nil) { |result, source| result || locale_from(source) } || default_locale
     end
 
-    # set I18n.locale, default_url_options[:locale] and cookies[:locale] to the value returned by
-    # detect_locale
+    # set I18n.locale, default_url_options[:locale] and cookies[:locale]
+    # to the value returned by detect_locale
     def set_locale
       self.current_locale = detect_locale
-      default_url_options[locale_key] = current_locale if set_default_url_option_for_request?
-      cookies[locale_key] = { :value => current_locale, :expires => RailsLocaleDetection.locale_expiry.from_now }
+
+      if set_default_url_option_for_request?
+        default_url_options[locale_key] = current_locale
+      end
+
+      if locale_from_cookie != current_locale
+        cookies[locale_key] = {
+          :value => current_locale,
+          :expires => RailsLocaleDetection.locale_expiry.from_now
+        }
+      end
     end
 
     # returns true if the default url option should be set for this request
