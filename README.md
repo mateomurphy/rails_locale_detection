@@ -56,6 +56,10 @@ The configuration options:
 
 ## Changelog
 
+### 2.3 (2018-06-16)
+
+* Update dependencies
+
 ### 2.2 (2017-04-22)
 
 * Cookie is now set only when the locale differs from the previous value, to avoid Set-Cookie headers being sent with every request
