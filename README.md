@@ -1,7 +1,6 @@
 # rails_locale_detection
 
 [![Build Status](https://travis-ci.org/mateomurphy/rails_locale_detection.png?branch=master)](https://travis-ci.org/mateomurphy/rails_locale_detection)
-[![Dependency Status](https://gemnasium.com/mateomurphy/rails_locale_detection.png)](https://gemnasium.com/mateomurphy/rails_locale_detection)
 
 Sets the current locale of a request using a combination of params, cookies, http headers, and an optional user object.
 
