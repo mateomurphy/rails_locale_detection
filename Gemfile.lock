@@ -224,7 +224,6 @@ GEM
     securerandom (0.4.1)
     stringio (3.2.0)
     thor (1.5.0)
-    timecop (0.9.11)
     timeout (0.6.1)
     tsort (0.2.0)
     tzinfo (2.0.6)
@@ -252,7 +251,6 @@ DEPENDENCIES
   rails_locale_detection!
   rake (~> 13.0)
   rspec-rails (~> 6.1)
-  timecop (~> 0.9)
 
 BUNDLED WITH
    2.7.2

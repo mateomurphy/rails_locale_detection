@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module RailsLocaleDetection
   module ControllerMethods
     extend ActiveSupport::Concern

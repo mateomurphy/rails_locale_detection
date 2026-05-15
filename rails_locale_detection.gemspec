@@ -26,5 +26,4 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency('gem-release', '~> 2.2')
   gem.add_development_dependency('rake', '~> 13.0')
   gem.add_development_dependency('rspec-rails', '~> 6.1')
-  gem.add_development_dependency('timecop', '~> 0.9')
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails'
 require 'i18n'
 require 'http_accept_language'
