@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/mateomurphy/rails_locale_detection/actions/workflows/ci.yml/badge.svg)](https://github.com/mateomurphy/rails_locale_detection/actions/workflows/ci.yml)
 
+**Compatibility:** Rails 6.1–8.0, Ruby 3.1+
+
 Sets the current locale of a request using a combination of params, cookies, http headers, and an optional user object.
 
 In turn, it checks the value of `params[:locale]`, `cookies[:locale]` and `HTTP_ACCEPT_LANGUAGE` headers to find a locale that
@@ -27,7 +29,9 @@ To support user locales, add a `user_locale` method
       end
     end
 
-Methods for accessing `current_locale`, `available_locales`, and `alternate_locales` are available in controller and views
+Methods for accessing `current_locale`, `available_locales`, and `alternate_locales` are available in controller and views.
+
+Works with both `ActionController::Base` and `ActionController::API` controllers.
 
 ## Configuration
 
@@ -55,34 +59,7 @@ The configuration options:
 
 ## Changelog
 
-### 3.0 (2026-05-15)
-
-* Rails 6.1, 7.0, 7.1, 7.2, and 8.0 compatibility
-* Dropped support for Rails < 6.1 and Ruby < 2.7
-* `ActionController::API` controllers are now supported alongside `ActionController::Base`
-* Replaced Travis CI with GitHub Actions
-* Internal cleanup: removed legacy version conditionals, modernized syntax, dropped the `timecop` dev dependency in favor of ActiveSupport's `freeze_time`
-
-### 2.3 (2018-06-16)
-
-* Update dependencies
-
-### 2.2 (2017-04-22)
-
-* Cookie is now set only when the locale differs from the previous value, to avoid Set-Cookie headers being sent with every request
-
-### 2.1 (2016-08-01)
-
-* Rails 5 compatibility
-
-### 2.0 (2015-10-14)
-
-* Rails 4 compatibility
-* Namespace has been changed from Rails::LocaleDetection to RailsLocaleDetection,
-    although the previous namespace is still supported for legacy config files
-* Locale detection has been moved to a seperate object, to avoid polluting controllers with extra methods.
-* Detection order has been changed to `param` first, as this make more sense in most contexts.
-* Shortcut locale accessors are now mixed into views as well
+See [CHANGELOG.md](CHANGELOG.md).
 
 ## Contributing to rails_locale_detection
 
