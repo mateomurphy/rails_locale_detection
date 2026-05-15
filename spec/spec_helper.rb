@@ -1,3 +1,4 @@
+require 'logger'
 require 'abstract_controller'
 require 'action_controller'
 require 'active_support/core_ext/integer/time'
