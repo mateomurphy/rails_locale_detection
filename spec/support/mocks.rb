@@ -6,11 +6,7 @@ class MockRequest
   def initialize
     @env = {'HTTP_ACCEPT_LANGUAGE' => ''}
     @cookies = {}
-    @cookie_jar = if ::Rails.version.to_s < "5.0"
-      ActionDispatch::Cookies::CookieJar.build(self)
-    else
-      ActionDispatch::Cookies::CookieJar.build(self, @cookies)
-    end
+    @cookie_jar = ActionDispatch::Cookies::CookieJar.build(self, @cookies)
   end
 
   def host
@@ -19,6 +15,10 @@ class MockRequest
 
   def ssl?
     false
+  end
+
+  def cookies_same_site_protection
+    proc { nil }
   end
 end
 
@@ -44,18 +44,7 @@ class MockController
   end
 
   class << self
-    attr_reader :before_filters
     attr_reader :before_actions
-  end
-
-  def self.before_filter(*args)
-    @before_filters ||= []
-    @before_filters << args
-  end
-
-  def self.append_before_filter(*args)
-    @before_filters ||= []
-    @before_filters << args
   end
 
   def self.append_before_action(*args)

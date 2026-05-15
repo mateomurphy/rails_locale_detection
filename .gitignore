@@ -1,3 +1,6 @@
+# dev config
+.vscode
+
 # rcov generated
 coverage
 

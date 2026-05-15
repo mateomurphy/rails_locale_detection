@@ -1,6 +1,6 @@
 # rails_locale_detection
 
-[![Build Status](https://travis-ci.org/mateomurphy/rails_locale_detection.png?branch=master)](https://travis-ci.org/mateomurphy/rails_locale_detection)
+[![CI](https://github.com/mateomurphy/rails_locale_detection/actions/workflows/ci.yml/badge.svg)](https://github.com/mateomurphy/rails_locale_detection/actions/workflows/ci.yml)
 
 Sets the current locale of a request using a combination of params, cookies, http headers, and an optional user object.
 
@@ -35,7 +35,7 @@ Configuration is done via a block that can be added as an initializer:
 
     RailsLocaleDetection.config do |config|
       config.locale_expiry = 3.months
-      config.set_default_url_option = :always # valid values are true, false, :always, :never and :explicity
+      config.set_default_url_option = :always # valid values are true, false, :always, :never and :explicitly
       config.detection_order = [:param, :user, :cookie, :request]
       config.automatically_detect = true
       config.locale_key = :locale
@@ -47,13 +47,21 @@ The configuration options:
 * `set_default_url_option` determines under which conditions the `default_url_option` is set
   * `true` or `:always` sets the option on all requests
   * `false` or `:never` never sets the option
-  * `:explicity` sets the option only when a param[:locale] is present
+  * `:explicitly` sets the option only when a `params[:locale]` is present
 * `detection_order` set the order in which locale detection occurs. Omit values to skip those sources
 * `automatically_detect` configures automatic inclusion of the detection callback.
     You can set this to false and include the callback yourself by calling `detect_locale` in your controller as required.
 * `locale_key` configures the key used for `param` and `cookie`
 
 ## Changelog
+
+### 3.0 (2026-05-15)
+
+* Rails 6.1, 7.0, 7.1, 7.2, and 8.0 compatibility
+* Dropped support for Rails < 6.1 and Ruby < 2.7
+* `ActionController::API` controllers are now supported alongside `ActionController::Base`
+* Replaced Travis CI with GitHub Actions
+* Internal cleanup: removed legacy version conditionals, modernized syntax, dropped the `timecop` dev dependency in favor of ActiveSupport's `freeze_time`
 
 ### 2.3 (2018-06-16)
 

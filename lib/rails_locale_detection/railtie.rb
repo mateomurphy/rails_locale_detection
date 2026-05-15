@@ -1,13 +1,19 @@
+# frozen_string_literal: true
+
 module RailsLocaleDetection
   class Railtie < Rails::Railtie
-    initializer "rails_locale_detection.append_before_filter" do
-      ActiveSupport.on_load(:action_controller) do
-        ActionController::Base.send :include, RailsLocaleDetection::ControllerMethods
+    initializer "rails_locale_detection.include_controller_methods" do
+      ActiveSupport.on_load(:action_controller_base) do
+        include RailsLocaleDetection::ControllerMethods
       end
-      
+
+      ActiveSupport.on_load(:action_controller_api) do
+        include RailsLocaleDetection::ControllerMethods
+      end
+
       ActiveSupport.on_load(:action_view) do
-        ActionView::Base.send :include, Rails::LocaleDetection::LocaleAccessors
-      end      
+        include RailsLocaleDetection::LocaleAccessors
+      end
     end
   end
 end

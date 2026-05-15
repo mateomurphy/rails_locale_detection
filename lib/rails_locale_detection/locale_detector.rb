@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module RailsLocaleDetection
   class LocaleDetector
     include DetectionMethods
@@ -5,7 +7,7 @@ module RailsLocaleDetection
 
     attr_reader :controller
 
-    delegate :params, :request, :default_url_options, :user_locale, :http_accept_language, :to => :controller
+    delegate :params, :request, :default_url_options, :user_locale, :http_accept_language, to: :controller
 
     def initialize(controller = nil)
       @controller = controller

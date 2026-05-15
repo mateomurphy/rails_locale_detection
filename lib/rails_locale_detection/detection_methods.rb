@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module RailsLocaleDetection
   module DetectionMethods
     # returns the (symbolized) value passed if it's in the available_locales
@@ -40,15 +42,21 @@ module RailsLocaleDetection
 
       if locale_from_cookie != current_locale
         cookies[locale_key] = {
-          :value => current_locale,
-          :expires => RailsLocaleDetection.locale_expiry.from_now
+          value: current_locale,
+          expires: RailsLocaleDetection.locale_expiry.from_now
         }
       end
     end
 
-    # returns true if the default url option should be set for this request
     def set_default_url_option_for_request?
-      RailsLocaleDetection.set_default_url_option === true || RailsLocaleDetection.set_default_url_option == :always || RailsLocaleDetection.set_default_url_option == :explicitly && params[locale_key].present?
+      case RailsLocaleDetection.set_default_url_option
+      when true, :always
+        true
+      when :explicitly
+        params[locale_key].present?
+      else
+        false
+      end
     end
   end
 end
